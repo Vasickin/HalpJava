@@ -2,15 +2,17 @@
 // Обновленный main
 class HelpJava {
     public static void main(String[] args) {
-        Introduction hi = new Introduction();
+        Introduction introduction = new Introduction();
         ShowMenu showMenu = new ShowMenu();
-        EnterMenuItem enter = new EnterMenuItem();
-        Menu menu = new Menu(enter); // Передаем enter в Menu
+        EnterMenuItem enterMenuItem = new EnterMenuItem();
+        Menu menu = new Menu(enterMenuItem);
 
-        hi.hello();
+        introduction.hello();
         showMenu.showMenu();
-        hi.menuItem();
-        enter.enter();
-        menu.menu(); // Теперь menu использует тот же экземпляр enter
+        introduction.menuItem();
+        enterMenuItem.enterValue();
+        menu.menuSection(); 
+
+    
     }
 }

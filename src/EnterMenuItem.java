@@ -2,22 +2,22 @@ import java.util.Scanner;
 
 public class EnterMenuItem {
 
-    private int section = 0;
+    private int selectedSection = 0;
 
-    void enter() {
+    void enterValue() {
         Scanner scanner = new Scanner(System.in);
         boolean validInput = false;
 
         while (!validInput) {
             if (scanner.hasNextInt()) {
-                section = scanner.nextInt();
+                selectedSection = scanner.nextInt();
                 scanner.nextLine();
                 System.out.println(" ");
 
-                if (section >= 1 && section <= 3) {
+                if (selectedSection >= 1 && selectedSection <= 3) {
                     validInput = true;
                 } else {
-                    System.out.println("Введенное значение " + section + " не найдено!");
+                    System.out.println("Введенное значение " + selectedSection + " не найдено!");
                     System.out.print("Введите другое значение: ");
                 }
             } else {
@@ -34,8 +34,8 @@ public class EnterMenuItem {
         }
     }
 
-    public int getSection() {
-        return section;
+    public int getSelectedSection() {
+        return selectedSection;
     }
 }
 

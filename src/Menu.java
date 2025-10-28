@@ -1,13 +1,14 @@
 // Menu.java
 public class Menu {
-    private EnterMenuItem enter;
+    private final  EnterMenuItem dataProvider;
 
-    public Menu(EnterMenuItem enter) {
-        this.enter = enter;
+    public Menu(EnterMenuItem passedValue) {
+        this.dataProvider = passedValue;
     }
 
-    void menu() {
-        int section = enter.getSection();
+    void menuSection() {
+        int section = dataProvider.getSelectedSection();
+        System.out.println("Веденный пункт меню: " + section);
         switch (section) {
             case 1:
                 System.out.println("Справка по операторам управления:");
