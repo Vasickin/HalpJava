@@ -3,9 +3,13 @@ import java.util.Scanner;
 public class EnterMenuItem {
 
     private int selectedSection = 0;
+    private final Scanner scanner;
+
+    public EnterMenuItem(){
+        this.scanner = new Scanner(System.in);
+    }
 
     void enterValue() {
-        Scanner scanner = new Scanner(System.in);
         boolean validInput = false;
 
         while (!validInput) {
@@ -32,6 +36,11 @@ public class EnterMenuItem {
                 }
             }
         }
+    }
+
+    String enterSubValue(){
+        System.out.println("Выберите пункт подменю: ");
+        return scanner.nextLine().trim();
     }
 
     public int getSelectedSection() {

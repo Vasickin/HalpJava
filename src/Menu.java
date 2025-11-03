@@ -25,6 +25,10 @@ public class Menu {
         }
     }
 
+    private void processControlOperators(){
+
+    }
+
     private void showControlOperators() {
         System.out.println("1. Оператор if");
         System.out.println("2. Оператор switch");
