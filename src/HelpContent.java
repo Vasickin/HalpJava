@@ -141,19 +141,29 @@ public class HelpContent {
     /**
      * Инициализирует раздел "Классы".
      *
-     * <p>В текущей версии раздел не заполнен. Зарезервировано для будущего расширения.</p>
+     * <p>Создает и добавляет в коллекцию все справочные материалы по классам в Java.</p>
      *
-     * <p><b>Планируемые материалы:</b>
+     * <p><b>Доступные материалы:</b>
      * <ul>
-     *   <li>Определение классов</li>
-     *   <li>Поля и методы</li>
-     *   <li>Конструкторы</li>
-     *   <li>Модификаторы доступа</li>
+     *   <li>Ключ "1" - определение классов ({@link ClassDefinition})</li>
+     *   <li>Ключ "2" - поля и методы ({@link FieldsAndMethods})</li>
+     *   <li>Ключ "3" - конструкторы ({@link Constructors})</li>
+     *   <li>Ключ "4" - модификаторы доступа ({@link AccessModifiers})</li>
      * </ul>
      * </p>
      */
     private void initializeClassReferences(){
+        // Определение классов
+        classReferences.put("1", new ClassDefinition());
 
+        // Поля и методы
+        classReferences.put("2", new FieldsAndMethods());
+
+        // Конструкторы
+        classReferences.put("3", new Constructors());
+
+        // Модификаторы доступа
+        classReferences.put("4", new AccessModifiers());
     }
 
     /**

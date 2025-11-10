@@ -220,178 +220,49 @@ public class Menu {
     /**
      * Обрабатывает раздел "Классы".
      *
-     * <p>В текущей версии используется временная реализация со switch-case,
-     * так как раздел классов ещё не полностью интегрирован с новой архитектурой.</p>
+     * <p>Отображает подменю классов и обрабатывает выбор пользователя.
+     * Использует унифицированный подход через {@link HelpContent} и
+     * интерфейс {@link ContentDisplay}.</p>
      *
-     * <p><b>План по улучшению:</b>
+     * <p>Теперь все разделы меню используют одинаковую архитектуру,
+     * что обеспечивает согласованность и простоту поддержки.</p>
+     *
+     * <p><b>Логика работы:</b>
      * <ul>
-     *   <li>Создать классы справок для раздела классов</li>
-     *   <li>Добавить их в {@link HelpContent}</li>
-     *   <li>Заменить switch-case на унифицированный подход</li>
+     *   <li>Отображение подменю классов</li>
+     *   <li>Ожидание ввода пользователя</li>
+     *   <li>Обработка команды возврата ('b')</li>
+     *   <li>Получение справочного материала через {@link HelpContent}</li>
+     *   <li>Универсальное отображение через {@link ContentDisplay#display()}</li>
+     *   <li>Валидация ввода и обработка ошибок</li>
      * </ul>
      * </p>
-     *
-     * @deprecated Этот метод будет заменен на унифицированную реализацию
-     * в будущих версиях после полной интеграции раздела классов.
      */
     private void processClasses() {
-        ShowMenu showSubmenu = new ShowMenu();
+        ShowMenu showSubMenu = new ShowMenu();
 
         while (true) {
-            showSubmenu.showClasses();
+            // Отображаем подменю классов
+            showSubMenu.showClasses();
+
+            // Получаем выбор пользователя
             String choice = dataProvider.enterSubValue();
 
-            // ВРЕМЕННАЯ РЕАЛИЗАЦИЯ - будет заменена на унифицированный подход
-            switch (choice) {
-                case "1":
-                    showClassDefinition();
-                    break;
-                case "2":
-                    showFieldsAndMethods();
-                    break;
-                case "3":
-                    showConstructors();
-                    break;
-                case "4":
-                    showAccessModifiers();
-                    break;
-                case "b":
-                    return;
-                default:
-                    System.out.println("Неверный выбор! Попробуйте снова.");
+            // Обрабатываем команду возврата
+            if ("b".equals(choice)) {
+                System.out.println("Возврат в главное меню...");
+                return;
+            }
+
+            // Получаем справочный материал через HelpContent
+            ContentDisplay reference = helpContent.getClassReference(choice);
+
+            if (reference != null) {
+                // Универсальный вызов - работает для ЛЮБОЙ темы классов!
+                reference.display();
+            } else {
+                System.out.println("Неверный выбор! Попробуйте снова.");
             }
         }
-    }
-
-
-///**
-// * Отображает справочную информацию по оператору if.
-// * Показывает синтаксис и примеры использования.
-// */
-//private void showIfOperator() {
-//    System.out.println("\n=== Оператор if ===");
-//    System.out.println("if (условие) {");
-//    System.out.println("    // код выполняется, если условие true");
-//    System.out.println("} else {");
-//    System.out.println("    // код выполняется, если условие false");
-//    System.out.println("}");
-//    WaitForEnter.waitForEnter();  // Ждем нажатия Enter перед продолжением
-//}
-//
-///**
-// * Отображает справочную информацию по оператору switch.
-// * Показывает синтаксис и примеры использования.
-// */
-//private void showSwitchOperator() {
-//    System.out.println("\n=== Оператор switch ===");
-//    System.out.println("switch (переменная) {");
-//    System.out.println("    case значение1:");
-//    System.out.println("        // код для значение1");
-//    System.out.println("        break;");
-//    System.out.println("    case значение2:");
-//    System.out.println("        // код для значение2");
-//    System.out.println("        break;");
-//    System.out.println("    default:");
-//    System.out.println("        // код по умолчанию");
-//    System.out.println("}");
-//    WaitForEnter.waitForEnter();
-//}
-
-    /// **
-// * Отображает справочную информацию по Тирнарному оператору.
-// * Показывает синтаксис и примеры использования.
-// */
-//private void showTernaryOperator() {
-//    System.out.println("\n=== Тернарный оператор ===");
-//    System.out.println("результат = (условие) ? значение1 : значение2;");
-//    System.out.println("Пример:");
-//    System.out.println("int max = (a > b) ? a : b;");
-//    WaitForEnter.waitForEnter();
-//}
-//
-//private void showForLoop() {
-//    System.out.println("\n=== Цикл for ===");
-//    System.out.println("for (инициализация; условие; итерация) {");
-//    System.out.println("    // тело цикла");
-//    System.out.println("}");
-//    System.out.println("Пример:");
-//    System.out.println("for (int i = 0; i < 10; i++) {");
-//    System.out.println("    System.out.println(i);");
-//    System.out.println("}");
-//    WaitForEnter.waitForEnter();
-//}
-//
-//private void showWhileLoop() {
-//    System.out.println("\n=== Цикл while ===");
-//    System.out.println("while (условие) {");
-//    System.out.println("    // тело цикла");
-//    System.out.println("}");
-//    WaitForEnter.waitForEnter();
-//}
-//
-//private void showDoWhileLoop() {
-//    System.out.println("\n=== Цикл do-while ===");
-//    System.out.println("do {");
-//    System.out.println("    // тело цикла");
-//    System.out.println("} while (условие);");
-//    WaitForEnter.waitForEnter();
-//}
-//
-//private void showEnhancedForLoop() {
-//    System.out.println("\n=== Enhanced for loop ===");
-//    System.out.println("for (тип переменная : коллекция) {");
-//    System.out.println("    // тело цикла");
-//    System.out.println("}");
-//    System.out.println("Пример:");
-//    System.out.println("for (String item : items) {");
-//    System.out.println("    System.out.println(item);");
-//    System.out.println("}");
-//    WaitForEnter.waitForEnter();
-//}
-    private void showClassDefinition() {
-        System.out.println("\n=== Определение класса ===");
-        System.out.println("public class ИмяКласса {");
-        System.out.println("    // поля");
-        System.out.println("    // методы");
-        System.out.println("    // конструкторы");
-        System.out.println("}");
-        WaitForEnter.waitForEnter();
-    }
-
-    private void showFieldsAndMethods() {
-        System.out.println("\n=== Поля и методы ===");
-        System.out.println("public class Example {");
-        System.out.println("    // поле");
-        System.out.println("    private int number;");
-        System.out.println("    ");
-        System.out.println("    // метод");
-        System.out.println("    public int getNumber() {");
-        System.out.println("        return number;");
-        System.out.println("    }");
-        System.out.println("}");
-        WaitForEnter.waitForEnter();
-    }
-
-    private void showConstructors() {
-        System.out.println("\n=== Конструкторы ===");
-        System.out.println("public class Example {");
-        System.out.println("    // конструктор по умолчанию");
-        System.out.println("    public Example() { }");
-        System.out.println("    ");
-        System.out.println("    // конструктор с параметром");
-        System.out.println("    public Example(int value) {");
-        System.out.println("        this.value = value;");
-        System.out.println("    }");
-        System.out.println("}");
-        WaitForEnter.waitForEnter();
-    }
-
-    private void showAccessModifiers() {
-        System.out.println("\n=== Модификаторы доступа ===");
-        System.out.println("public    - доступен везде");
-        System.out.println("protected - доступен в пакете и наследниках");
-        System.out.println("default   - доступен только в пакете");
-        System.out.println("private   - доступен только в классе");
-        WaitForEnter.waitForEnter();
     }
 }
